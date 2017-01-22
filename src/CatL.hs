@@ -55,6 +55,7 @@ rankCompTerms (Vx k n) = c (s' (s' (c (n,k))),e)
 rankCompTerms (Ax k a b) = c (k,q) where q = c (rankCompTerms a, rankCompTerms b)
 
 -- Reverse steps of encoding compressed de Bruijn terms with the following func below.
+-- With this we can use both rank and unrank on Cat instance N.
 -- CatL> unrankCompTerms 123456
 -- CatL> rankCompTerms 123456
 unrankCompTerms :: Cat a => a -> X a
@@ -64,9 +65,14 @@ unrankCompTerms z = f y where
   f y | e_ y = Vx k n where (n,k) = c' (s (s x))
   f y | c_ y = Ax x (unrankCompTerms a) (unrankCompTerms b) where (a,b) = c' y
 
+-- Define further ranking / unranking funcs for converting
+-- between open de Bruijn terms and corresponding instances of
+-- the set Cat.
+-- e.g We can attempt to encode / decode de Bruijn form now for
+-- pairing combinators such as:
+-- CatL> binary2tree (Lb (Lb (Lb (Ab (Ab (Vb 0) (Vb 2)) (Vb 1)))))
+tree2binary :: Cat a => a -> B a
+tree2binary = fromCompDeBruijn . unrankCompTerms
 
-
-
-
-
-
+binary2tree :: Cat a => B a -> a
+binary2tree = fromCompDeBruijn . convertDeBruijn

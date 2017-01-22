@@ -2,21 +2,23 @@ name:                tree-base-lambda
 version:             0.1.0.0
 synopsis:            Initial project template from stack
 description:         Please see README.md
-homepage:            https://github.com/githubuser/tree-base-lambda#readme
+homepage:            https://github.com/ojd2/tree-base-lambda#readme
 license:             BSD3
 license-file:        LICENSE
 author:              ojd2 Derived from Paper by P.Tarau
 maintainer:          kinokaf@zoho.com
 copyright:           2017 ojd2 & P.Tarau
-category:            tree based de bruijn lambda terms
+category:            tree based, de bruijn, lambda terms
 build-type:          Simple
 extra-source-files:  README.md
 cabal-version:       >=1.10
 
 library
   hs-source-dirs:      src
-  exposed-modules:     Lib
-  build-depends:       base >= 4.7 && < 5
+  exposed-modules:     GCat, CatL
+  build-depends:       base >= 4.7 && < 5,
+                       random >=1.1 && <2,
+                       math-functions >=0.2 && <0.3
   default-language:    Haskell2010
 
 executable tree-base-lambda-exe
@@ -24,7 +26,6 @@ executable tree-base-lambda-exe
   main-is:             CatL.hs
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N
   build-depends:       base
-                     , tree-base-lambda
   default-language:    Haskell2010
 
 test-suite tree-base-lambda-test
@@ -38,4 +39,4 @@ test-suite tree-base-lambda-test
 
 source-repository head
   type:     git
-  location: https://github.com/githubuser/tree-base-lambda
+  location: https://github.com/ojd2/tree-base-lambda
